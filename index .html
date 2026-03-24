@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Trophy Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .trophies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .trophy-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trophy-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .trophy-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .trophy-name {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .trophy-price {
+            font-size: 2rem;
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .buy-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255,107,107,0.4);
+        }
+
+        .contact-section {
+            background: rgba(255,255,255,0.95);
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .phone { color: #e74c3c; }
+        .email { color: #3498db; }
+        .location { color: #27ae60; }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .trophies-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .contact-section {
+                padding: 40px 20px;
+                margin: 40px 0;
+            }
+        }
+
+        .cart-count {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            z-index: 1000;
+            display: none;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .added {
+            animation: bounce 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart-count" id="cartCount">Cart: 0</div>
+
+    <header>
+        <h1>🏏 Mahadev Parvati Spots</h1>
+        <p class="subtitle">Premium Trophies for Champions</p>
+    </header>
+
+    <div class="container">
+        <section class="trophies-grid" id="trophiesGrid">
+            <!-- Trophies will be populated by JavaScript -->
+        </section>
+
+        <section class="contact-section">
+            <h2>📞 Get in Touch</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px; color: #666;">
+                Ready to order? Contact us for bulk orders and custom designs!
+            </p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon phone">📱</div>
+                    <h3>Phone</h3>
+                    <p>+91 7003964513</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon email">✉️</div>
+                    <h3>Email</h3>
+                    <p>samarhaldar444@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon location">📍</div>
+                    <h3>Location</h3>
+                    <p>Baruipur , Sealdah , West Bengal</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Cricket Trophy Store. All rights reserved. 🏆</p>
+    </footer>
+
+    <script>
+        const trophies = [
+       
+
+{ id: 1, name: "Cricket Trophy 1", price: 3400, image: "images/trophy1.jpeg" },
+{ id: 2, name: "Cricket Trophy 2", price: 4200, image: "images/trophy2.jpeg" },
+{ id: 3, name: "Cricket Trophy 3", price: 3400, image: "images/trophy3.jpeg" },
+{ id: 4, name: "Cricket Trophy 4", price: 4500, image: "images/trophy4.jpeg" },
+{ id: 5, name: "Cricket Trophy 5", price: 1200, image: "images/trophy5.jpeg" },
+{ id: 6, name: "Cricket Trophy 6", price: 1400, image: "images/trophy6.jpeg" },
+{ id: 7, name: "Cricket Trophy 7", price: 1500, image: "images/trophy7.jpeg" },
+{ id: 8, name: "Cricket Trophy 8", price: 3400, image: "images/trophy8.jpeg" },
+{ id: 9, name: "Cricket Trophy 9", price: 4700, image: "images/trophy9.jpeg" },
+{ id: 10, name: "Cricket Trophy 10", price: 3400, image: "images/trophy10.jpeg" },
+
+{ id: 11, name: "Cricket Trophy 11", price: 3100, image: "images/trophy11.jpeg" },
+{ id: 12, name: "Cricket Trophy 12", price: 3400, image: "images/trophy12.jpeg" },
+{ id: 13, name: "Cricket Trophy 13", price: 3400, image: "images/trophy13.jpeg" },
+{ id: 14, name: "Cricket Trophy 14", price: 4800, image: "images/trophy14.jpeg" },
+{ id: 15, name: "Cricket Trophy 15", price: 3400, image: "images/trophy15.jpeg" },
+{ id: 16, name: "Cricket Trophy 16", price: 1150, image: "images/trophy16.jpeg" },
+{ id: 17, name: "Cricket Trophy 17", price: 3000, image: "images/trophy17.jpeg" },
+{ id: 18, name: "Cricket Trophy 18", price: 800, image: "images/trophy18.jpeg" },
+{ id: 19, name: "Cricket Trophy 19", price: 3400, image: "images/trophy19.jpeg" },
+{ id: 20, name: "Cricket Trophy 20", price: 1000, image: "images/trophy20.jpeg" },
+
+{ id: 21, name: "Cricket Trophy 21", price: 2200, image: "images/trophy21.jpeg" },
+{ id: 22, name: "Cricket Trophy 22", price: 1350, image: "images/trophy22.jpeg" },
+{ id: 23, name: "Cricket Trophy 23", price: 1300, image: "images/trophy23.jpeg" },
+{ id: 24, name: "Cricket Trophy 24", price: 4800, image: "images/trophy24.jpeg" },
+{ id: 25, name: "Cricket Trophy 25", price: 1250, image: "images/trophy25.jpeg" },
+{ id: 26, name: "Cricket Trophy 26", price: 1400, image: "images/trophy26.jpeg" },
+{ id: 27, name: "Cricket Trophy 27", price: 1750, image: "images/trophy27.jpeg" },
+{ id: 28, name: "Cricket Trophy 28", price: 2400, image: "images/trophy28.jpeg" },
+{ id: 29, name: "Cricket Trophy 29", price: 1200, image: "images/trophy29.jpeg" },
+{ id: 30, name: "Cricket Trophy 30", price: 2300, image: "images/trophy30.jpeg" },
+
+{ id: 31, name: "Cricket Trophy 31", price: 1700, image: "images/trophy31.jpeg" },
+{ id: 32, name: "Cricket Trophy 32", price: 2300, image: "images/trophy32.jpeg" },
+{ id: 33, name: "Cricket Trophy 33", price: 1500, image: "images/trophy33.jpeg" },
+{ id: 34, name: "Cricket Trophy 34", price: 2200, image: "images/trophy34.jpeg" },
+{ id: 35, name: "Cricket Trophy 35", price: 3400, image: "images/trophy35.jpeg" }
+
+];
+
+
+        let cartCount = 0;
+
+        function createTrophyCard(trophy) {
+            const card = document.createElement('div');
+            card.className = 'trophy-card';
+            card.innerHTML = `
+                <img src="${trophy.image}" alt="${trophy.name}" class="trophy-image" 
+                     onerror="this.src='https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop'">
+                <h3 class="trophy-name">${trophy.name}</h3>
+                <div class="trophy-price">$${trophy.price.toFixed(2)}</div>
+                <button class="buy-btn" onclick="addToCart(${trophy.id})">
+                    🛒 Add to Cart
+                </button>
+            `;
+            return card;
+        }
+
+        function renderTrophies() {
+            const grid = document.getElementById('trophiesGrid');
+            grid.innerHTML = '';
+            trophies.forEach(trophy => {
+                grid.appendChild(createTrophyCard(trophy));
+            });
+        }
+
+        function addToCart(trophyId) {
+            cartCount++;
+            updateCartDisplay();
+            
+            // Animate the buy button
+            const btn = event.target;
+            btn.textContent = '✅ Added!';
+            btn.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+            btn.parentElement.classList.add('added');
+            
+            setTimeout(() => {
+                btn.textContent = '🛒 Add to Cart';
+                btn.style.background = 'linear-gradient(45deg, #ff6b6b, #ee5a24)';
+                btn.parentElement.classList.remove('added');
+            }, 1500);
+
+            // Show success message
+            showNotification(`${trophies.find(t => t.id === trophyId).name} added to cart!`);
+        }
+
+        function updateCartDisplay() {
+            const cartEl = document.getElementById('cartCount');
+            cartEl.textContent = `Cart: ${cartCount}`;
+            cartEl.style.display = cartCount > 0 ? 'block' : 'none';
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: #27ae60;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                font-weight: bold;
+                z-index: 1001;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Initialize
+        renderTrophies();
+        updateCartDisplay();
+
+        // Add CSS for notification animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
